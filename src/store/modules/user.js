@@ -31,37 +31,49 @@ const actions = {
   // user login
   login({ commit }, userInfo) {
     const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    const data = {'token':'admin'}
+    commit('SET_TOKEN', data.token)
+    setToken(data.token)
+    
+    // return new Promise((resolve, reject) => {
+    //   login({ username: username.trim(), password: password }).then(response => {
+    //     const { data } = response
+    //     commit('SET_TOKEN', data.token)
+    //     setToken(data.token)
+    //     resolve()
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
+
   },
 
   // get user info
   getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+    const data ={'name':'admin','avatar':'null'}
+    if (!data) {
+            return reject('Verification failed, please Login again.')
+    }
+    commit('SET_NAME', data.name)
+    commit('SET_AVATAR', data.avatar)
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
+    // return new Promise((resolve, reject) => {
+    //   getInfo(state.token).then(response => {
+    //     const { data } = response
 
-        const { name, avatar } = data
+    //     if (!data) {
+    //       return reject('Verification failed, please Login again.')
+    //     }
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    //     const { name, avatar } = data
+
+    //     commit('SET_NAME', name)
+    //     commit('SET_AVATAR', avatar)
+    //     resolve(data)
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
   },
 
   // user logout
