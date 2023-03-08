@@ -33,6 +33,8 @@
             <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                     <el-button type="danger" icon="el-icon-delete" circle @click="deleteHospSetById(scope.row.id)"></el-button>
+                    <el-button v-if="scope.row.status==1" type="primary" size="mini" @click="lockHospitalSet(scope.row.id, 0)">锁定</el-button>
+                    <el-button v-if="scope.row.status==0" type="primary" size="mini" @click="lockHospitalSet(scope.row.id, 1)">取消锁定</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -131,16 +133,19 @@ export default {
                     // 刷新页面
                     this.getList(1)
                 })
-            })
-            // }).catch(() => {
-            // this.$message({
-            //     type: 'info',
-            //     message: '已取消删除'
-            //     });          
-            // });
+            }).catch(() => {
+            this.$message({
+                type: 'info',
+                message: '已取消删除'
+                });          
+            });
         },
+        // 锁定和取消锁定
+        lockHospitalSet(id, status) {
+            hospset.lockHospitalSet(id, status).then(response => {
+                this.getList(this.current)
+            })
+        }
     }
-
-
 }
 </script>
