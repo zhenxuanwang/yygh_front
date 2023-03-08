@@ -73,6 +73,13 @@ export const constantRoutes = [
         name: '医院设置新增',
         component: () => import('@/views/hospset/add'),
         meta: { title: '医院设置新增', icon: 'tree' }
+      },
+      {
+        path: 'edit/:id',
+        name: '医院设置修改',
+        component: () => import('@/views/hospset/add'),
+        meta: { title: '医院设置修改', noCache: true },
+        hidden: true
       }
     ]
   },

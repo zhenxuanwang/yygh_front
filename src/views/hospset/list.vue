@@ -30,9 +30,12 @@
                     {{scope.row.status === 1 ? '可用' : '不可用'}}
                 </template>
             </el-table-column>
-            <el-table-column label="操作" align="center">
+            <el-table-column label="操作" width="280" align="center">
                 <template slot-scope="scope">
                     <el-button type="danger" icon="el-icon-delete" circle @click="deleteHospSetById(scope.row.id)"></el-button>
+                    <router-link :to="'/hospSet/edit/' + scope.row.id">
+                        <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+                    </router-link>
                     <el-button v-if="scope.row.status==1" type="primary" size="mini" @click="lockHospitalSet(scope.row.id, 0)">锁定</el-button>
                     <el-button v-if="scope.row.status==0" type="primary" size="mini" @click="lockHospitalSet(scope.row.id, 1)">取消锁定</el-button>
                 </template>

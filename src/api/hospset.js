@@ -32,8 +32,34 @@ export default {
         return request({
             url:`/admin/hosp/hospitalSet/lockHospitalSet/${id}/${status}`,
             method:'put',
+        })
+    },
 
+    // 添加医院设置信息
+    saveHospitalSet(hospitalSet) {
+        return request({
+            url: `/admin/hosp/hospitalSet/saveHospitalSet`,
+            method: 'post',
+            data: hospitalSet
+        })
+    },
+
+    // 通过id查询医院设置信息
+    getHospSet(id) {
+        return request({
+            url:`/admin/hosp/hospitalSet/getHospSet/${id}`,
+            method: 'get'
+        })
+    },
+
+    //修改医院设置信息
+    updateHospitalSet(hospitalSet) {
+        return request({
+            url: `/admin/hosp/hospitalSet/updateHospitalSet`,
+            method: 'post',
+            data: hospitalSet
         })
     }
+
 
 }
