@@ -85,6 +85,22 @@ export const constantRoutes = [
   },
 
   {
+    path: '/cmn',
+    component: Layout,
+    redirect: '/cmn/list',
+    name: '数据管理',
+    meta: { title: '数据管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'list',
+        name: '数据字典',
+        component: () => import('@/views/dict/list'),
+        meta: { title: '数据字典', icon: 'table' }
+      },
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
